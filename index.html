@@ -19,8 +19,9 @@
 
         function addSquares() {
             var div = document.createElement('div');
-            div.style.width = '50px';
-            div.style.height = '50px';
+            div.style.width = '60px';
+            div.style.height = '60px';
+            div.style.borderRadius = '5px';
             div.style.backgroundColor = 'pink';
             div.className = 'grid';
             // div.style.border = 'thick solid #0000FF';
@@ -42,7 +43,7 @@
             };
             alert('Board has been reset!');
             removeSquares();
-            var userGrid = prompt('New grid size? Enter a number, the grid will be your number rows by your number columns');
+            var userGrid = prompt('New grid size?');
             document.body.style.setProperty('--userGrid', userGrid)
             drawGrid(userGrid);
             highlightGrid();
@@ -55,9 +56,16 @@
             };
         };
 
+        function random_rgba() {
+            var o = Math.round;
+            var r = Math.random;
+            var s = 255;
+            return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+        }
+
         function highlight(e) {
             console.log('Mouse hovered!');
-            e.target.style.backgroundColor = 'black';
+            e.target.style.backgroundColor = random_rgba();
         };
 
         function unhighlight(e) {
