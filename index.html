@@ -4,16 +4,87 @@
         <link rel='stylesheet' type='text/css' href='stylesheet.css'>
     </head>
     <body>
-        <div class='grid-container'>
-            <div></div>
+        <div class='buttons'>
+            <button name='reset' id='reset' onclick='reset()'>Reset Grid</button>
         </div>
-
+        <div class='input'>
+            
+        </div>
+       
     <script>
-        var div = document.createElement('div');
-        div.innerHTML = 'JS DIV'
-        div.style.width = 100px;
-        div.style.height = 100px;
-        div.style.backgroudn = black;
+        var divContainer = document.createElement('div');
+        divContainer.className = 'grid-container';
+        divContainer.width = '100%';
+        document.body.appendChild(divContainer);
+
+        function addSquares() {
+            var div = document.createElement('div');
+            div.style.width = '50px';
+            div.style.height = '50px';
+            div.style.backgroundColor = 'pink';
+            div.className = 'grid';
+            // div.style.border = 'thick solid #0000FF';
+            divContainer.appendChild(div);
+        };
+
+        function removeSquares() {
+            var gridsToRemove = document.querySelectorAll('.grid');
+            for (currentGrid = 0; currentGrid < gridsToRemove.length; currentGrid++) {
+                gridsToRemove[currentGrid].remove();
+            };
+        };
+
+        function reset() {
+            var board = document.querySelectorAll('.grid');
+            var item = 0;
+            for (item = 0; item < board.length; item++) {
+                board[item].style.backgroundColor = 'pink';
+            };
+            alert('Board has been reset!');
+            removeSquares();
+            var userGrid = prompt('New grid size? Enter a number, the grid will be your number rows by your number columns');
+            document.body.style.setProperty('--userGrid', userGrid)
+            drawGrid(userGrid);
+            highlightGrid();
+        };
+
+
+        function drawGrid(gridSize) {
+            for (i = 0; i < (gridSize ** 2); i++) {
+                addSquares();
+            };
+        };
+
+        function highlight(e) {
+            console.log('Mouse hovered!');
+            e.target.style.backgroundColor = 'black';
+        };
+
+        function unhighlight(e) {
+            console.log('Mouse no longer hovering!');
+            e.target.style.backgroundColor = 'pink';
+        };
+
+        // function reset() {
+        //     var board = document.querySelectorAll('.grid');
+        //     var item = 0;
+        //     for (item = 0; item < board.length; item++) {
+        //         board[item].style.backgroundColor = 'pink';
+        //     };
+        //     alert('Board has been reset!');
+        //     var gridSize = prompt('New grid size? Enter a number, the grid will be your number rows by your number columns', 16);
+        // };
+
+        function highlightGrid() {
+            const gridItem = document.querySelectorAll('.grid');
+            gridItem.forEach(grid => grid.addEventListener('mouseenter', highlight));
+        };
+        // gridItem.forEach(grid => grid.addEventListener('mouseout', unhighlight));
+
+        // initialize grid
+        drawGrid(16);
+        document.body.style.setProperty('--userGrid', 16)
+        highlightGrid();
     </script>
     </body>
 </html>

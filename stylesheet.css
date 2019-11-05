@@ -1,5 +1,19 @@
 .grid-container {
+    display: grid;
+    /* background: orange; */
+    /* grid-auto-flow: column; */
+    grid-template-columns: repeat(var(--userGrid), auto);
+    /* grid-template-rows: repeat(auto); */
+    /* grid-column-start: auto; */
+    grid-gap: 20px;
+    width: 100%;
+    justify-content: center;
+}
+
+.buttons {
     display: flex;
-    background: orange;
-    
+    justify-content: center;
+    /* width: 100%; */
+    height: 20px;
+    margin: 10px;
 }
